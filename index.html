@@ -32,7 +32,7 @@ body{
  overflow:hidden;
 }
 
-/* BACKGROUND */
+/* ================= BACKGROUND ================= */
 .bg{
  position:fixed;
  inset:0;
@@ -83,7 +83,30 @@ body{
  80%{opacity:1;transform:translate(-50%,-50%) scale(1.15)}
 }
 
-/* LOGIN */
+/* ================= FLOAT BACK BUTTON ================= */
+.back-btn{
+ position:fixed;
+ top:18px;
+ right:18px;
+ z-index:99;
+ background:var(--card);
+ box-shadow:var(--shadow);
+ border-radius:50%;
+ width:46px;
+ height:46px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:22px;
+ cursor:pointer;
+ transition:.25s;
+}
+.back-btn:hover{
+ background:var(--primary);
+ color:#fff;
+}
+
+/* ================= LOGIN ================= */
 .login{
  position:relative;
  z-index:2;
@@ -115,7 +138,7 @@ body{
 }
 .msg{margin-top:12px;color:red;font-weight:bold}
 
-/* DASHBOARD */
+/* ================= DASHBOARD ================= */
 .dashboard{
  display:none;
  position:relative;
@@ -216,7 +239,8 @@ body{
  box-shadow:var(--shadow);
  width:340px;
 }
-.modal-box input, .modal-box button{
+.modal-box input,
+.modal-box button{
  width:100%;
  padding:14px;
  margin-top:12px;
@@ -228,17 +252,31 @@ body{
  background:var(--primary);
  color:#fff;
 }
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:768px){
+ body{overflow:auto}
+ .login{margin:40px 16px}
+ .dashboard{padding:18px}
+ .top{flex-direction:column}
+ .user-info{flex-direction:column}
+ .info-card{width:100%;text-align:center}
+ .pages{grid-template-columns:1fr}
+}
 </style>
 </head>
 
 <body>
 
-<div class="bg">
+<div class="bg" id="bg">
  <div class="stars"></div>
  <div class="glow"></div>
  <img src="https://lh3.googleusercontent.com/pw/AP1GczMiRkDmMrZOPEMglikz95yOdSkrhKpx46bQE-TsNpqt8Cc-zZ53W7zBe3vVum7ljY-ynEQB8PIlpgmDjkrfSIv5JG-j1qGCNS-uk_iGnmMaql_MuCwKC7F4G7gd1Hn4GRWdyJ0L9HYHt4HLpnTtMQxH=w2499-h1214-s-no-gm">
 </div>
 
+<div class="back-btn" onclick="history.back()">⬅️</div>
+
+<!-- LOGIN -->
 <div class="login" id="loginBox">
 <img src="https://lh3.googleusercontent.com/pw/AP1GczMiRkDmMrZOPEMglikz95yOdSkrhKpx46bQE-TsNpqt8Cc-zZ53W7zBe3vVum7ljY-ynEQB8PIlpgmDjkrfSIv5JG-j1qGCNS-uk_iGnmMaql_MuCwKC7F4G7gd1Hn4GRWdyJ0L9HYHt4HLpnTtMQxH=w2499-h1214-s-no-gm">
 <h2>تسجيل الدخول</h2>
@@ -248,6 +286,7 @@ body{
 <div class="msg" id="msg"></div>
 </div>
 
+<!-- DASHBOARD -->
 <div class="dashboard" id="dashboard">
  <div class="top">
   <div class="user-info" id="info"></div>
@@ -263,10 +302,11 @@ body{
  <div class="pages" id="pages"></div>
 </div>
 
+<!-- CHANGE PASSWORD -->
 <div class="modal" id="passModal">
  <div class="modal-box">
   <h3>تغيير كلمة المرور</h3>
-  <input id="newPass" type="password">
+  <input id="newPass" type="password" placeholder="كلمة المرور الجديدة">
   <button onclick="changePass()">حفظ</button>
  </div>
 </div>
