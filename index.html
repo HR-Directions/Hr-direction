@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard</title>
+<title>HR Dashboard</title>
 
 <style>
 :root{
@@ -11,77 +11,26 @@
  --card:#ffffff;
  --text:#222;
  --primary:#1976d2;
- --shadow:0 -6px 20px rgba(0,0,0,.08),0 12px 30px rgba(0,0,0,.18);
+ --shadow:0 10px 25px rgba(0,0,0,.15);
 }
 body.dark{
  --bg:#0f0f0f;
  --card:#1c1c1c;
  --text:#eee;
  --primary:#64b5f6;
- --shadow:0 -6px 20px rgba(0,0,0,.25),0 14px 35px rgba(0,0,0,.55);
 }
 body{
  margin:0;
- font-family:Segoe UI, Tahoma;
+ font-family:Segoe UI,Tahoma;
  background:var(--bg);
  color:var(--text);
- overflow:hidden;
 }
 
-/* BACKGROUND */
-.bg{
- position:fixed;
- inset:0;
- z-index:0;
- pointer-events:none;
-}
-.bg .stars{
- position:absolute;
- width:200%;
- height:200%;
- background:url('https://i.imgur.com/9yG8g.gif');
- background-size:cover;
- opacity:.12;
- animation:spin 200s linear infinite;
-}
-.bg .glow{
- position:absolute;
- width:500px;
- height:500px;
- top:50%;
- left:50%;
- transform:translate(-50%,-50%);
- background:radial-gradient(circle, rgba(0,191,255,.45), transparent 70%);
- filter:blur(70px);
- animation:glow 15s ease-in-out infinite;
-}
-.bg img{
- position:absolute;
- top:50%;
- left:50%;
- width:50%;
- max-width:600px;
- transform:translate(-50%,-50%) scale(.9);
- animation:logo 15s ease-in-out infinite;
- opacity:.85;
-}
-
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes glow{50%{transform:translate(-40%,-50%) scale(1.2)}}
-@keyframes logo{
- 0%{opacity:0;transform:translate(-50%,-50%) scale(.8)}
- 20%{opacity:1}
- 50%{opacity:0;transform:translate(120%,-50%)}
- 51%{transform:translate(-120%,-50%) scale(.8)}
- 80%{opacity:1}
-}
-
-/* BACK BUTTON */
+/* زر الرجوع */
 .back-btn{
  position:fixed;
- top:18px;
- right:18px;
- z-index:99;
+ top:16px;
+ right:16px;
  width:46px;
  height:46px;
  border-radius:50%;
@@ -92,146 +41,86 @@ body{
  justify-content:center;
  font-size:22px;
  cursor:pointer;
- display:none;
+ z-index:100;
 }
+.back-btn:hover{background:var(--primary);color:#fff}
 
 /* LOGIN */
 .login{
- position:relative;
- z-index:2;
  max-width:420px;
- margin:90px auto;
+ margin:80px auto;
  background:var(--card);
- padding:35px;
- border-radius:22px;
+ padding:30px;
+ border-radius:20px;
  box-shadow:var(--shadow);
  text-align:center;
 }
-.login img{width:120px;margin-bottom:15px}
-.login input{
+.login input, .login button{
  width:100%;
  padding:14px;
- margin:10px 0;
+ margin-top:12px;
  border-radius:14px;
  border:1px solid #ccc;
 }
 .login button{
- width:100%;
- padding:14px;
- border-radius:16px;
- border:0;
  background:var(--primary);
  color:#fff;
+ border:0;
  font-size:16px;
 }
-.msg{margin-top:12px;color:red;font-weight:bold}
+.msg{color:red;margin-top:10px}
 
 /* DASHBOARD */
-.dashboard{
- display:none;
- position:relative;
- z-index:2;
- height:100vh;
- overflow:auto;
- padding:25px;
-}
+.dashboard{display:none;padding:20px}
 .top{
  display:flex;
  justify-content:space-between;
- align-items:center;
  flex-wrap:wrap;
  gap:15px;
- margin-bottom:25px;
+ margin-bottom:20px;
 }
-.user-info{display:flex;gap:15px;flex-wrap:wrap}
 .info-card{
  background:var(--card);
  padding:14px 18px;
- border-radius:18px;
- box-shadow:var(--shadow);
- min-width:170px;
-}
-.settings{position:relative}
-.settings button{
- background:var(--card);
- border:0;
- padding:10px 14px;
- border-radius:14px;
- box-shadow:var(--shadow);
- font-size:18px;
-}
-.menu{
- display:none;
- position:absolute;
- left:0;
- top:50px;
- background:var(--card);
  border-radius:16px;
  box-shadow:var(--shadow);
- overflow:hidden;
 }
-.menu div{padding:14px 20px;cursor:pointer}
-.menu div:hover{background:rgba(0,0,0,.05)}
 
 /* PAGES */
 .pages{
  display:grid;
- grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
- gap:20px;
-}
-.section{
- grid-column:1/-1;
- font-weight:bold;
- color:var(--primary);
- margin-top:35px;
- font-size:18px;
+ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ gap:18px;
 }
 .page{
  background:var(--card);
- padding:24px;
- border-radius:22px;
+ padding:22px;
+ border-radius:18px;
  box-shadow:var(--shadow);
  text-align:center;
  cursor:pointer;
  transition:.25s;
 }
-.page:hover{transform:translateY(-6px);background:var(--primary);color:#fff}
-
-/* IFRAME */
-.viewer{
- display:none;
- position:fixed;
- inset:0;
- z-index:50;
- background:#fff;
-}
-.viewer iframe{
- width:100%;
- height:100%;
- border:0;
+.page:hover{
+ background:var(--primary);
+ color:#fff;
+ transform:translateY(-5px);
 }
 
+/* Responsive */
 @media(max-width:768px){
- body{overflow:auto}
- .dashboard{padding:18px}
- .pages{grid-template-columns:1fr}
+ .login{margin:40px 16px}
+ .top{flex-direction:column}
 }
 </style>
 </head>
 
 <body>
 
-<div class="bg">
- <div class="stars"></div>
- <div class="glow"></div>
- <img src="https://lh3.googleusercontent.com/pw/AP1GczMiRkDmMrZOPEMglikz95yOdSkrhKpx46bQE-TsNpqt8Cc-zZ53W7zBe3vVum7ljY-ynEQB8PIlpgmDjkrfSIv5JG-j1qGCNS-uk_iGnmMaql_MuCwKC7F4G7gd1Hn4GRWdyJ0L9HYHt4HLpnTtMQxH=w2499-h1214-s-no-gm">
-</div>
-
-<div class="back-btn" id="backBtn" onclick="closePage()">⬅️</div>
+<div class="back-btn" onclick="history.back()">⬅️</div>
 
 <!-- LOGIN -->
 <div class="login" id="loginBox">
-<img src="https://lh3.googleusercontent.com/pw/AP1GczMiRkDmMrZOPEMglikz95yOdSkrhKpx46bQE-TsNpqt8Cc-zZ53W7zBe3vVum7ljY-ynEQB8PIlpgmDjkrfSIv5JG-j1qGCNS-uk_iGnmMaql_MuCwKC7F4G7gd1Hn4GRWdyJ0L9HYHt4HLpnTtMQxH=w2499-h1214-s-no-gm">
 <h2>تسجيل الدخول</h2>
 <input id="username" placeholder="اسم المستخدم">
 <input id="password" type="password" placeholder="كلمة المرور">
@@ -242,21 +131,16 @@ body{
 <!-- DASHBOARD -->
 <div class="dashboard" id="dashboard">
  <div class="top">
-  <div class="user-info" id="info"></div>
-  <div class="settings">
-   <button onclick="menu.style.display=menu.style.display=='block'?'none':'block'">⚙️</button>
-   <div class="menu" id="menu">
-    <div onclick="toggleDark()">🌙 Dark Mode</div>
-    <div onclick="logout()">🚪 تسجيل خروج</div>
-   </div>
-  </div>
+  <div class="info-card">👤 <span id="uName"></span></div>
+  <div class="info-card">🏢 <span id="uBranch"></span></div>
+  <div class="info-card" onclick="toggleDark()" style="cursor:pointer">🌙 Dark Mode</div>
  </div>
- <div class="pages" id="pages"></div>
-</div>
 
-<!-- PAGE VIEW -->
-<div class="viewer" id="viewer">
- <iframe id="frame"></iframe>
+ <div class="pages">
+  <div class="page" onclick="go('pages/employees.html')">👥 الموظفين</div>
+  <div class="page" onclick="go('pages/sales.html')">💰 المبيعات</div>
+  <div class="page" onclick="go('pages/reports.html')">📊 التقارير</div>
+ </div>
 </div>
 
 <script>
@@ -264,13 +148,16 @@ const DB="https://hr-mange-1ec00-default-rtdb.firebaseio.com";
 let currentUser=null;
 
 function login(){
- fetch(DB+"/USAR.json").then(r=>r.json()).then(d=>{
+ msg.innerHTML="";
+ fetch(DB+"/USAR.json")
+ .then(r=>r.json())
+ .then(d=>{
   for(const id in d){
-   if(d[id].username.toLowerCase()==username.value.toLowerCase()
-   && d[id].password==password.value){
+   if(d[id].username==username.value && d[id].password==password.value){
     currentUser=d[id];
     localStorage.setItem("session",JSON.stringify(currentUser));
-    loadDashboard();return;
+    loadDashboard();
+    return;
    }
   }
   msg.innerHTML="❌ بيانات غير صحيحة";
@@ -280,47 +167,23 @@ function login(){
 function loadDashboard(){
  loginBox.style.display="none";
  dashboard.style.display="block";
- info.innerHTML=`
- <div class="info-card"><small>المستخدم</small>${currentUser.username}</div>
- <div class="info-card"><small>المدير</small>${currentUser.managerName}</div>
- <div class="info-card"><small>الفرع</small>${currentUser.branchName}</div>`;
- loadPages();
+ uName.textContent=currentUser.username;
+ uBranch.textContent=currentUser.branchName;
 }
 
-function loadPages(){
- pages.innerHTML="";
- fetch(DB+"/Pages.json").then(r=>r.json()).then(data=>{
-  for(const s in data){
-   let list="",has=false;
-   for(const p in data[s].items){
-    const key=(data[s].title||s)+"|"+data[s].items[p].name;
-    if(currentUser.pages?.[key]){
-     has=true;
-     list+=`<div class="page" onclick="openPage('${data[s].items[p].url}')">${data[s].items[p].name}</div>`;
-    }
-   }
-   if(has) pages.innerHTML+=`<div class="section">${data[s].title||s}</div>${list}`;
-  }
- });
+function go(url){
+ location.href = url; // نفس الصفحة ✔️ بدون تبويب جديد
 }
 
-function openPage(url){
- viewer.style.display="block";
- frame.src=url;
- backBtn.style.display="flex";
+function toggleDark(){
+ document.body.classList.toggle("dark");
 }
-
-function closePage(){
- viewer.style.display="none";
- frame.src="";
- backBtn.style.display="none";
-}
-
-function toggleDark(){document.body.classList.toggle("dark")}
-function logout(){localStorage.clear();location.reload()}
 
 const s=localStorage.getItem("session");
-if(s){currentUser=JSON.parse(s);loadDashboard()}
+if(s){
+ currentUser=JSON.parse(s);
+ loadDashboard();
+}
 </script>
 
 </body>
